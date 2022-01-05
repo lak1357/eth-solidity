@@ -25,13 +25,38 @@ contract Election {
         electionName = _name;
     }
 
+    function addCandidate(string memory _candidateName) ownerOnly public{
+        candidates.push(Candidate(_candidateName,0));
+    }
+
+    function getNumCandidates() public view returns(uint){
+        return candidates.length;
+    }
+
+    function authorize(address _person) ownerOnly public {
+        voters[_person].authorized = true;
+    }
+
+    function vote(uint candidateIndex) canVote public {
+        voters[msg.sender].voted = true;
+        voters[msg.sender].vote = candidateIndex;
+        candidates[candidateIndex].voteCount += 1;
+        totalVotes += 1;
+    }
+
+    function end() ownerOnly public {
+        selfdestruct(payable(owner));
+    }
+
     modifier ownerOnly(){
         require(msg.sender == owner);
         _;
     }
 
-    function addCandidate(string memory _candidateName) ownerOnly public{
-        candidates.push(Candidate(_candidateName,0));
+    modifier canVote(){
+        require(voters[msg.sender].authorized);
+        require(!voters[msg.sender].voted);
+        _;
     }
 
 }
