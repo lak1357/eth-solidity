@@ -33,6 +33,10 @@ contract Election {
         return candidates.length;
     }
 
+    function getCadidate(uint _index) public view returns(string memory){
+        return candidates[_index].name;
+    }
+
     function authorize(address _person) ownerOnly public {
         voters[_person].authorized = true;
     }
@@ -43,6 +47,7 @@ contract Election {
         candidates[candidateIndex].voteCount += 1;
         totalVotes += 1;
     }
+
 
     function end() ownerOnly public {
         selfdestruct(payable(owner));

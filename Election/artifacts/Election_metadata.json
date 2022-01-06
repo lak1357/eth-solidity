@@ -87,6 +87,25 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_index",
+						"type": "uint256"
+					}
+				],
+				"name": "getCadidate",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "getNumCandidates",
 				"outputs": [
@@ -196,11 +215,11 @@
 	},
 	"sources": {
 		"Election/Election.sol": {
-			"keccak256": "0x6811e55eb18d3b2e62dc40dedac6c4791e537b1e45aa28616f02c07e4c67e35b",
+			"keccak256": "0x5212db139a7fd0a321e663029a0409015860bd208af7b21db829f400cae2517f",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://31c619d297dbe053550098e825579267ee2d912cab6a378ab6ac84c5bf4b7934",
-				"dweb:/ipfs/QmRTwezHn84wBYtvp5MrMxoZ3sWM7qW9YxtKBUyeCtSXM8"
+				"bzz-raw://3208b960408f620a73975afa491834ee1769e6bb03da0caf8a14660470d00e5d",
+				"dweb:/ipfs/QmbjXbAW57h3vYTpsmhruu5BQcRmpxSrbqHDpoLCkKqR2W"
 			]
 		}
 	},
