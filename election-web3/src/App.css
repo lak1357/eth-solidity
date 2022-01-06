@@ -11,6 +11,11 @@
   padding: 10px;
 }
 
+.add-candidate {
+  text-align: center;
+  margin: 100px;
+}
+
 .candidate-list {
   text-align: left;
   margin: 1px;
@@ -33,6 +38,11 @@
 
 .elec-button {
   background: orange;
+  margin: "2px";
+}
+
+.submit-button {
+  background: green;
   margin: "2px";
 }
 

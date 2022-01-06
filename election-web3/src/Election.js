@@ -9,6 +9,7 @@ const Election = () => {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [electionName, setElectionName] = useState("...");
   const [candidateNames, setCandidateNames] = useState([]);
+  const [inputData, setInputData] = useState("");
 
   const checkWalletIsConnected = async () => {
     const { ethereum } = window;
@@ -40,7 +41,7 @@ const Election = () => {
 
     try {
       const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
+        method: "eth_requestAccounts"
       });
       console.log("Found an account! Address: ", accounts[0]);
       setCurrentAccount(accounts[0]);
@@ -111,15 +112,39 @@ const Election = () => {
     }
   };
 
-  const connectWalletButton = () => {
-    return (
-      <button
-        onClick={connectWalletHandler}
-        className="cta-button connect-wallet-button"
-      >
-        Connect Wallet
-      </button>
-    );
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInputData(value);
+  };
+
+  const addCandidates = async (event) => {
+    event.preventDefault();
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+
+        const sContract = new ethers.Contract(
+          contractAddress,
+          electionAbi,
+          signer
+        );
+        let result;
+
+        try {
+          result = await sContract.addCandidate(inputData);
+        } catch (e) {
+          console.log("error in pulling file hashes", e);
+        }
+        console.log(candidateNames);
+      } else {
+        console.log("Ethereum object does not exist");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const getCandidatesList = () => {
@@ -131,6 +156,17 @@ const Election = () => {
           ))}
         </ul>
       </div>
+    );
+  };
+
+  const connectWalletButton = () => {
+    return (
+      <button
+        onClick={connectWalletHandler}
+        className="cta-button connect-wallet-button"
+      >
+        Connect Wallet
+      </button>
     );
   };
 
@@ -156,6 +192,18 @@ const Election = () => {
 
   return (
     <div className="main-app">
+      <form onSubmit={addCandidates}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={inputData}
+            name="name"
+            onChange={handleChange}
+          />
+        </label>
+        <input type="submit" value="Add Candidate" className="submit-button" />
+      </form>
       <div className="button-container">
         {currentAccount ? getElectionNameButton() : connectWalletButton()}
       </div>
