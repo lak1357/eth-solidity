@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.4.22 <0.9.0;
+pragma solidity >=0.7.0 <0.9.0;
 
 contract Election {
     struct Candidate {
@@ -32,19 +32,11 @@ contract Election {
         return candidates.length;
     }
 
-<<<<<<< HEAD:election/contracts/Election.sol
     function getCadidate(uint256 _index) public view returns (string memory) {
         return candidates[_index].name;
     }
 
     function authorize(address _person) public ownerOnly {
-=======
-    function getCadidate(uint _index) public view returns(string memory){
-        return candidates[_index].name;
-    }
-
-    function authorize(address _person) ownerOnly public {
->>>>>>> 09dc09655337f2a41e13cc59c8d8b637b6c03b3e:Election/Election.sol
         voters[_person].authorized = true;
     }
 
@@ -55,12 +47,7 @@ contract Election {
         totalVotes += 1;
     }
 
-<<<<<<< HEAD:election/contracts/Election.sol
     function end() public ownerOnly {
-=======
-
-    function end() ownerOnly public {
->>>>>>> 09dc09655337f2a41e13cc59c8d8b637b6c03b3e:Election/Election.sol
         selfdestruct(payable(owner));
     }
 
