@@ -4,7 +4,7 @@ import electionAbi from "./contracts/Election.json";
 
 const Election = () => {
   // deploy simple storage contract and paste deployed contract address here. This value is local ganache chain
-  let contractAddress = "0x844F847d79aB34A9e8Ce50fb62BC72Cb68038D5c";
+  let contractAddress = "0x8B2f2c8212dd37fb3959F9BCB62f8A95BdEC6bD3";
 
   const [currentAccount, setCurrentAccount] = useState(null);
   const [electionName, setElectionName] = useState("...");
